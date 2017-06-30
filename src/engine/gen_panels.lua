@@ -1,4 +1,3 @@
-require("util")
 local random = math.random
 
 -- stuff should have first_seven, metal, vs_mode, metal_col, prev_metal_col

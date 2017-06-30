@@ -84,11 +84,11 @@ function menu_key_func(fixed, configurable, rept)
   end
 end
 
-menu_up = menu_key_func({"up"}, {"up"}, true)
-menu_down = menu_key_func({"down"}, {"down"}, true)
-menu_left = menu_key_func({"left"}, {"left"}, true)
-menu_right = menu_key_func({"right"}, {"right"}, true)
-menu_enter = menu_key_func({"return","kenter","z"}, {"swap1"}, false)
+menu_up     = menu_key_func({"up"}, {"up"}, true)
+menu_down   = menu_key_func({"down"}, {"down"}, true)
+menu_left   = menu_key_func({"left"}, {"left"}, true)
+menu_right  = menu_key_func({"right"}, {"right"}, true)
+menu_enter  = menu_key_func({"return","kenter","z"}, {"swap1"}, false)
 menu_escape = menu_key_func({"escape","x"}, {"swap2"}, false)
 
 do

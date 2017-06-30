@@ -1,17 +1,18 @@
+json = require("lib.dkjson")
 require("socket")
-require("class")
-json = require("dkjson")
-require("stridx")
-require("gen_panels")
+require("lib.class")
+require("lib.util")
+require("lib.stridx")
+require("engine.gen_panels")
 
-local byte = string.byte
-local char = string.char
-local pairs = pairs
-local ipairs = ipairs
-local random = math.random
+local byte          = string.byte
+local char          = string.char
+local pairs         = pairs
+local ipairs        = ipairs
+local random        = math.random
 local lobby_changed = false
-local time = os.time
-local TIMEOUT = 10
+local time          = os.time
+local TIMEOUT       = 10
 
 
 local VERSION = "004"

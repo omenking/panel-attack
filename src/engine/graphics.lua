@@ -249,14 +249,14 @@ function Stack.render(self)
               else
                 draw(imgs.doubleface, draw_x+8*(width-1), top_y+16*((height-2)/2))
               end
-              draw(imgs.left, draw_x, top_y, 0, 1, height*16)
-              draw(imgs.right, draw_x+16*(width-1)+8, top_y, 0, 1, height*16)
-              draw(imgs.top, draw_x, top_y, 0, width*16)
-              draw(imgs.bot, draw_x, draw_y+14, 0, width*16)
-              draw(imgs.topleft, draw_x, top_y)
-              draw(imgs.topright, draw_x+16*width-8, top_y)
-              draw(imgs.botleft, draw_x, draw_y+13)
-              draw(imgs.botright, draw_x+16*width-8, draw_y+13)
+              draw(imgs.left    , draw_x               , top_y     , 0, 1        , height*16)
+              draw(imgs.right   , draw_x+16*(width-1)+8, top_y     , 0, 1        , height*16)
+              draw(imgs.top     , draw_x               , top_y     , 0, width*16)
+              draw(imgs.bot     , draw_x               , draw_y+14 , 0, width*16)
+              draw(imgs.topleft , draw_x               , top_y)
+              draw(imgs.topright, draw_x+16*width-8    , top_y)
+              draw(imgs.botleft , draw_x               , draw_y+13)
+              draw(imgs.botright, draw_x+16*width-8    , draw_y+13)
             end
           end
           if panel.state == "matched" then
@@ -572,3 +572,4 @@ void Render_Info_1P()
 
   TBlit(224,95,P1SpeedLVDisplay,screen);
 }--]]
+

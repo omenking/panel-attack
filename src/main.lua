@@ -1,16 +1,21 @@
+-- lib files
 socket = require("socket")
-json = require("dkjson")
-require("util")
-require("class")
-require("queue")
-require("globals")
-require("save")
-require("engine")
-require("graphics")
-require("input")
-require("network")
-require("puzzles")
-require("mainloop")
+json   = require("lib.dkjson")
+require("lib.util")
+require("lib.class")
+require("lib.queue")
+
+-- data
+require("data.puzzles")
+
+-- engine
+require("engine.globals")
+require("engine.save")
+require("engine.engine")
+require("engine.graphics")
+require("engine.input")
+require("engine.network")
+require("engine.mainloop")
 
 local N_FRAMES = 0
 
