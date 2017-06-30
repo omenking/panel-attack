@@ -84,12 +84,12 @@ function menu_key_func(fixed, configurable, rept)
   end
 end
 
-menu_up     = menu_key_func({"up"}, {"up"}, true)
-menu_down   = menu_key_func({"down"}, {"down"}, true)
-menu_left   = menu_key_func({"left"}, {"left"}, true)
+menu_up     = menu_key_func({"up"}   , {"up"}   , true)
+menu_down   = menu_key_func({"down"} , {"down"} , true)
+menu_left   = menu_key_func({"left"} , {"left"} , true)
 menu_right  = menu_key_func({"right"}, {"right"}, true)
-menu_enter  = menu_key_func({"return","kenter","z"}, {"swap1"}, false)
-menu_escape = menu_key_func({"escape","x"}, {"swap2"}, false)
+menu_enter  = menu_key_func({"return", "kenter" , "z"}     , {"swap1"}, false)
+menu_escape = menu_key_func({"escape", "x"}     , {"swap2"}, false)
 
 do
   local active_idx = 1
@@ -97,11 +97,14 @@ do
     local items = {{"1P endless", main_select_speed_99, {main_endless}},
         {"1P puzzle", main_select_puzz},
         {"1P time attack", main_select_speed_99, {main_time_attack}},
-        {"2P fakevs at burke.ro", main_net_vs_setup, {"burke.ro"}},
-        {"2P fakevs local game", main_local_vs_setup},
+        {"",nil},
+        {"2P vs Server", main_net_vs_setup, {"burke.ro"}},
+        {"2P vs Local", main_local_vs_setup},
+        {"",nil},
         {"Replay of 1P endless", main_replay_endless},
         {"Replay of 1P puzzle", main_replay_puzzle},
-        {"Replay of 2P fakevs", main_replay_vs},
+        {"Replay of 2P vs", main_replay_vs},
+        {"",nil},
         {"Configure input", main_config_input},
         {"Set name", main_set_name},
         {"Quit", os.exit}}
