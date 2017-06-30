@@ -9,7 +9,7 @@ function love.conf(t)
   t.modules.sound = false
   t.modules.physics = false
   t.identity = "Panel Attack"
-  t.version = "0.9.0"
+  t.version = "0.10.2"
   t.release = false
 
   -- DEFAULTS FROM HERE DOWN
