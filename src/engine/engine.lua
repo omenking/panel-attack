@@ -21,8 +21,9 @@ Stack = class(function(s, which, mode, speed, difficulty)
       local level = speed or 5
       s.character = (type(difficulty) == "string") and difficulty or s.character
       s.level = level
-      speed = level_to_starting_speed[level]
+      speed      = level_to_starting_speed[level]
       difficulty = level_to_difficulty[level]
+
       s.speed_times = {15*60, idx=1, delta=15*60}
       s.max_health = level_to_hang_time[level]
       if s.mode == "2ptime" then
@@ -91,20 +92,20 @@ Stack = class(function(s, which, mode, speed, difficulty)
               -- unlocked.
     s.has_risen = false   -- set once the stack rises once during the game
 
-    s.stop_time = 0
+    s.stop_time       = 0
     s.stop_time_timer = 0
 
-    s.NCOLORS = s.NCOLORS or 5
-    s.score = 0         -- der skore
+    s.NCOLORS       = s.NCOLORS or 5
+    s.score         = 0         -- der skore
     s.chain_counter = 0   -- how high is the current chain?
 
     s.panels_in_top_row = false -- boolean, for losing the game
-    s.danger = false  -- boolean, panels in the top row (danger)
-    s.danger_music = false -- changes music state
+    s.danger            = false  -- boolean, panels in the top row (danger)
+    s.danger_music      = false -- changes music state
 
-    s.n_active_panels = 0
+    s.n_active_panels    = 0
     s.prev_active_panels = 0
-    s.n_chain_panels= 0
+    s.n_chain_panels     = 0
 
        -- These change depending on the difficulty and speed levels:
     s.FRAMECOUNT_HOVER = FC_HOVER[s.difficulty]
@@ -165,13 +166,13 @@ function Stack.mkcpy(self, other)
   else
 
   end--]]
-  other.garbage_q = deepcpy(self.garbage_q)
+  other.garbage_q       = deepcpy(self.garbage_q)
   other.garbage_to_send = deepcpy(self.garbage_to_send)
-  other.input_state = self.input_state
-  local height = self.height or other.height
-  local width = self.width or other.width
-  local height_to_cpy = #self.panels
-  other.panels = other.panels or {}
+  other.input_state     = self.input_state
+  local height          = self.height or other.height
+  local width           = self.width or other.width
+  local height_to_cpy   = #self.panels
+  other.panels          = other.panels or {}
   for i=1,height_to_cpy do
     if other.panels[i] == nil then
       other.panels[i] = {}
@@ -193,26 +194,26 @@ function Stack.mkcpy(self, other)
       other.panels[i][j]:clear()
     end
   end
-  other.CLOCK = self.CLOCK
-  other.displacement = self.displacement
-  other.speed_times = deepcpy(self.speed_times)
-  other.panels_to_speedup = self.panels_to_speedup
-  other.stop_time = self.stop_time
-  other.stop_time_timer = self.stop_time_timer
-  other.score = self.score
-  other.chain_counter = self.chain_counter
-  other.n_active_panels = self.n_active_panels
-  other.prev_active_panels = self.prev_active_panels
-  other.n_chain_panels = self.n_chain_panels
-  other.FRAMECOUNT_RISE = self.FRAMECOUNT_RISE
-  other.rise_timer = self.rise_timer
-  other.manual_raise_yet = self.manual_raise_yet
+  other.CLOCK                = self.CLOCK
+  other.displacement         = self.displacement
+  other.speed_times          = deepcpy(self.speed_times)
+  other.panels_to_speedup    = self.panels_to_speedup
+  other.stop_time            = self.stop_time
+  other.stop_time_timer      = self.stop_time_timer
+  other.score                = self.score
+  other.chain_counter        = self.chain_counter
+  other.n_active_panels      = self.n_active_panels
+  other.prev_active_panels   = self.prev_active_panels
+  other.n_chain_panels       = self.n_chain_panels
+  other.FRAMECOUNT_RISE      = self.FRAMECOUNT_RISE
+  other.rise_timer           = self.rise_timer
+  other.manual_raise_yet     = self.manual_raise_yet
   other.prevent_manual_raise = self.prevent_manual_raise
-  other.cur_timer = self.cur_timer
-  other.cur_dir = self.cur_dir
-  other.cur_row = self.cur_row
-  other.cur_col = self.cur_col
-  other.card_q = deepcpy(self.card_q)
+  other.cur_timer            = self.cur_timer
+  other.cur_dir              = self.cur_dir
+  other.cur_row              = self.cur_row
+  other.cur_col              = self.cur_col
+  other.card_q               = deepcpy(self.card_q)
   return other
 end
 
@@ -265,21 +266,18 @@ end
 -- chaining
 
 do
-  local exclude_hover_set = {matched=true, popping=true, popped=true,
-      hovering=true, falling=true}
+  local exclude_hover_set = {matched=true, popping=true, popped=true, hovering=true, falling=true}
   function Panel.exclude_hover(self)
     return exclude_hover_set[self.state] or self.garbage
   end
 
-  local exclude_match_set = {swapping=true, matched=true, popping=true,
-      popped=true, dimmed=true, falling=true}
+  local exclude_match_set = {swapping=true, matched=true, popping=true, popped=true, dimmed=true, falling=true}
   function Panel.exclude_match(self)
     return exclude_match_set[self.state] or self.color == 0 or self.color == 9
       or (self.state == "hovering" and not self.match_anyway)
   end
 
-  local exclude_swap_set = {matched=true, popping=true, popped=true,
-      hovering=true, dimmed=true}
+  local exclude_swap_set = {matched=true, popping=true, popped=true, hovering=true, dimmed=true}
   function Panel.exclude_swap(self)
     return exclude_swap_set[self.state] or self.dont_swap or self.garbage
   end
@@ -292,8 +290,7 @@ do
   -- "falling-ness should not propogate up through this panel"
   -- We need this because garbage doesn't hover, it just falls
   -- opportunistically.
-  local block_garbage_fall_set = {matched=true, popping=true,
-      popped=true, hovering=true, swapping=true}
+  local block_garbage_fall_set = {matched=true, popping=true, popped=true, hovering=true, swapping=true}
   function Panel.block_garbage_fall(self)
     return block_garbage_fall_set[self.state] or self.color == 0
   end

@@ -6,10 +6,10 @@ require("lib.class")
 require("lib.queue")
 
 -- data
+require("data.globals")
 require("data.puzzles")
 
 -- engine
-require("engine.globals")
 require("engine.save")
 require("engine.engine")
 require("engine.graphics")
